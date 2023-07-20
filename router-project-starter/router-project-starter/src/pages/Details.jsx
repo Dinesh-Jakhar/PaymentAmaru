@@ -22,7 +22,7 @@ const Details = (props) => {
   
 
   const handleSubmit = (e) => {
-  
+  e.preventDefault();
 
   const cardData = {
     cardNumber,

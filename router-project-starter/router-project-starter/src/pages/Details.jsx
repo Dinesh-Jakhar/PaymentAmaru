@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
+import InputMask from 'react-input-mask';
+import cash from '../assets/cash.png';
+import square from '../assets/square.png';
 const Details = (props) => {
     const amount=props.amount;
   const [saveInfo, setSaveInfo] = useState(false);
@@ -18,6 +20,12 @@ const Details = (props) => {
   const [cardHolderLastName, setCardHolderLastName] = useState('');
   const [email,setEmail]=useState('');
   const [postalCode, setPostalCode] = useState('');
+
+  const validateCardNumber = (number) => {
+    // Implement your card number validation here
+    // This is a simple example which checks if the number is 16 digits
+    return number.length === 16 && !isNaN(number);
+  }
 
   
 
@@ -85,7 +93,7 @@ const Details = (props) => {
   return (
     <div className="bg-gray-100 font-sans">
       <div className="p-6 bg-white shadow-md">
-        <h1 className="text-2xl font-bold">Digital Media Promotion</h1>
+        <h1 className="text-2xl font-bold text-center">Digital Media Promotion</h1>
       </div>
       <div className="p-6">
         <form >
@@ -199,33 +207,27 @@ const Details = (props) => {
                 <p className="text-base font-semibold">Credit Card</p>
               </div>
               <div className="w-1/4 text-right">
-                <img src="credit-card.png" alt="Credit Card" className="w-8 inline" />
+                <img src="../assets/credit-card.png" alt="Credit Card" className="w-8 inline" />
               </div>
             </div>
             <div className="mt-4">
               <div className="flex items-center border-b border-gray-300">
                 <div className="w-1/6">
-                  <img src="credit-card.png" alt="Credit Card" className="w-8 inline" />
+                  <img src="../assets/credit-card.png" alt="Credit Card" className="w-8 inline" />
                 </div>
                 <div className="w-5/6">
-                  <input
-                    type="text"
-                    maxLength="19"
-                    minLength="16"
-                    className="w-full p-2 bg-gray-100 outline-none"
+                   <InputMask mask="9999 9999 9999 9999"     className="w-full p-2 bg-gray-100 outline-none"
                     name="card_number"
                     placeholder="Card Number"
-                    required
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                  />
+                    required value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} />
                 </div>
+               
               </div>
               <div className="flex items-center">
                 <div className="w-1/3">
-                  <input
+                  <InputMask
                     type="text"
-                    maxLength="7"
+                    mask="99/99"
                     className="w-full p-2 bg-gray-100 outline-none"
                     name="card_exp"
                     placeholder="MM/YY"
@@ -267,7 +269,7 @@ const Details = (props) => {
                 <p className="text-base font-semibold">Cash App Pay</p>
               </div>
               <div className="w-1/4">
-                <img src="cash.png" alt="Cash App" className="w-8 inline" />
+                <img src={cash} alt="Cash App" className="w-8 inline" />
               </div>
             </div>
           </div>
@@ -322,7 +324,7 @@ const Details = (props) => {
         </form>
       </div>
       <div className="p-6 text-center">
-        <img src="square.png" alt="Square" className="w-12 inline" />
+        <img src={square} alt="Square" className="w-12 inline" />
         <p className="text-gray-600 text-sm">Secure payment by Square</p>
       </div>
     </div>

@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import cash from '../assets/cash.png';
 import square from '../assets/square.png';
+import gpay from '../assets/google-pay-icon.webp'
+import card from '../assets/credit-card.png';
+import lock from '../assets/lock.png'
+import afterpay from '../assets/afterpay.png'
+import diss from '../assets/diss.png'
+import NotDiss from '../assets/inn.png';
+import pay from '../assets/ppp.png'
 const Details = (props) => {
     const amount=props.amount;
   const [saveInfo, setSaveInfo] = useState(false);
@@ -144,9 +151,9 @@ const Details = (props) => {
               onClick={handleGpayClick}
             >
               <img
-                src="gpay.png"
+                src={gpay}
                 alt="Google Pay"
-                className="w-24 mx-auto"
+                className="w-18 mx-auto h-12"
               />
             </button>
             {showGpayAlert && (
@@ -199,7 +206,7 @@ const Details = (props) => {
             />
           </div>
           <hr className="border-gray-300 my-8" />
-          <p className="mb-2 font-semibold">PAYMENT <img src="lock.png" alt="Lock" className="w-6 inline" /></p>
+          <p className="mb-2 font-semibold">PAYMENT <img src={lock} alt="Lock" className="w-6 inline" /></p>
           <p className="text-xs font-semibold mb-1">All transactions are secure and encrypted</p>
           <div className="active_payment_div mb-4 border-2 border-gray-300 rounded p-4">
             <div className="flex items-center">
@@ -207,7 +214,7 @@ const Details = (props) => {
                 <p className="text-base font-semibold">Credit Card</p>
               </div>
               <div className="w-1/4 text-right">
-                <img src="../assets/credit-card.png" alt="Credit Card" className="w-8 inline" />
+                <img src={card} alt="Credit Card" className="w-8 inline" />
               </div>
             </div>
             <div className="mt-4">
@@ -285,7 +292,7 @@ const Details = (props) => {
                 </p>
               </div>
               <div className="w-1/4">
-                <img src="afterpay.png" alt="Afterpay" className="w-8 inline" />
+                <img src={afterpay} alt="Afterpay" className="w-8 inline" />
               </div>
             </div>
           </div>
@@ -294,10 +301,10 @@ const Details = (props) => {
           )}
           <hr className="border-gray-300 my-8" />
           <p className="mb-2 font-semibold">REMEMBER ME</p>
-          <div className="p-4 bg-gray-100 mb-4 rounded text-sm">
+          <div className="p-4 bg-gray-100 mb-4 rounded text-sm" onClick={handleSaveInfo}>
             <div className="flex items-center">
-              <div className="w-1/8">
-                <img src="diss.png" alt="Remember Me" className="w-8" />
+              <div className="w-1/8" >
+                <img src={!saveInfo ? diss : NotDiss} alt="Remember Me" className="w-8 transition-duration-300 ease-in-out cursor-pointer" />
               </div>
               <div className="w-7/8">
                 Save my information for a faster checkout
@@ -305,14 +312,15 @@ const Details = (props) => {
             </div>
           </div>
           <div className="py-4">
-            <img src="ppp.png" alt="Pay" className="w-6 inline" /> <b>Pay</b>
+            <img src={pay} alt="Pay" className="w-6 inline" /> <b>Pay</b>
           </div>
           <hr className="border-gray-300 my-8" />
           
-            <Link to='/Checkout'>
+           
+             <Link to='/Checkout'>
                 <button
               type="submit"
-              className="btn bbtn"
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
               name="btnsave"
               onClick={handleSubmit}
             >
